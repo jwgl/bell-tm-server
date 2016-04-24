@@ -1,0 +1,89 @@
+buildscript {
+    ext {
+        grailsVersion = project.grailsVersion
+        pluginHibernate5Version = project.pluginHibernate5Version
+    }
+    repositories {
+        mavenLocal()
+        maven { url "https://repo.grails.org/grails/core" }
+    }
+    dependencies {
+        classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+        classpath "org.grails.plugins:hibernate5:$pluginHibernate5Version"
+        classpath "org.grails.plugins:views-gradle:1.0.8"
+    }
+}
+
+version "0.1"
+group "cn.edu.bnuz.bell"
+
+apply plugin:"eclipse"
+apply plugin:"idea"
+apply plugin:"war"
+apply plugin:"org.grails.grails-web"
+apply plugin:"org.grails.plugins.views-json"
+
+ext {
+    grailsVersion = project.grailsVersion
+    gradleWrapperVersion = project.gradleWrapperVersion
+    postgresVersion = project.postgresVersion
+    pluginHibernate5Version = project.pluginHibernate5Version
+    hibernateVersion = project.hibernateVersion
+}
+
+repositories {
+    mavenLocal()
+    maven { url "https://repo.grails.org/grails/core" }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.grails:grails-bom:$grailsVersion"
+    }
+    applyMavenExclusions false
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-logging"
+    compile "org.springframework.boot:spring-boot-autoconfigure"
+    compile "org.grails:grails-core"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-starter-tomcat"
+    compile "org.grails:grails-plugin-url-mappings"
+    compile "org.grails:grails-plugin-rest"
+    compile "org.grails:grails-plugin-codecs"
+    compile "org.grails:grails-plugin-interceptors"
+    compile "org.grails:grails-plugin-services"
+    compile "org.grails:grails-plugin-datasource"
+    compile "org.grails:grails-plugin-databinding"
+    compile "org.grails:grails-plugin-async"
+    compile "org.grails:grails-web-boot"
+    compile "org.grails:grails-logging"
+    compile "org.grails.plugins:cache"
+    compile "org.grails.plugins:views-json"
+    console "org.grails:grails-console"
+    profile "org.grails.profiles:rest-api:3.1.5"
+    runtime "com.h2database:h2"
+    testCompile "org.grails:grails-plugin-testing"
+    testCompile "org.grails.plugins:geb"
+    testCompile "org.grails:grails-datastore-rest-client"
+    testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
+    testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+    // postgres
+    compile "org.postgresql:postgresql:$postgresVersion"
+    // hibernate 5
+    compile "org.grails.plugins:hibernate5:$pluginHibernate5Version"
+    compile "org.hibernate:hibernate-core:$hibernateVersion"
+    compile "org.hibernate:hibernate-ehcache:$hibernateVersion"
+    compile "org.hibernate:hibernate-java8:$hibernateVersion"
+    // security
+    compile "org.springframework.boot:spring-boot-starter-security"
+    compile "org.springframework.security.oauth:spring-security-oauth2"
+    // project
+    compile "cn.edu.bnuz.bell:bc-cdm:0.1"
+    compile "cn.edu.bnuz.bell:bc-sys:0.1"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = gradleWrapperVersion
+}

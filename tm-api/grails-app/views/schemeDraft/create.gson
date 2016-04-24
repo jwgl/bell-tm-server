@@ -1,0 +1,61 @@
+import cn.edu.bnuz.bell.master.Course
+import cn.edu.bnuz.bell.master.Direction
+import cn.edu.bnuz.bell.planning.Scheme
+import cn.edu.bnuz.bell.planning.SchemeCourse
+import cn.edu.bnuz.bell.planning.SchemeTemplate
+import cn.edu.bnuz.bell.planning.SchemeTemplateProperty
+import cn.edu.bnuz.bell.planning.SchemeTemplateTerm
+
+model {
+    Scheme scheme
+    List<Direction> directions
+}
+
+json {
+    id scheme.id
+    versionNumber scheme.versionNumber
+    schemeCourses(scheme.courses) { SchemeCourse sc ->
+        id               sc.getId()
+        courseId         sc.getCourse().getId()
+        courseName       sc.getCourse().getName()
+        credit           sc.getCourse().getCredit()
+        practiceCredit   sc.getPracticeCredit()
+        isCompulsory     sc.getIsCompulsory()
+        isPractical      sc.getIsPractical()
+        theoryPeriod     sc.getPeriod().getTheory()
+        experimentPeriod sc.getPeriod().getExperiment()
+        periodWeeks      sc.getPeriod().getWeeks()
+        assessType       sc.getAssessType()
+        suggestedTerm    sc.getSuggestedTerm()
+        allowedTerm      sc.getAllowedTerm()
+        courseGroup      sc.getCourseGroup()
+        isPrimary        sc.getIsPrimary()
+        operation        sc.getOperation()
+        reviseVersion    sc.getReviseVersion()
+        previous         sc.getPrevious()?.getId()
+        propertyId       sc.getProperty().getId()
+        directionId      sc.getDirection()?.getId()
+    }
+
+    directions(directions) { Direction direction ->
+        id   direction.id
+        name direction.name
+    }
+
+    SchemeTemplate schemeTemplate = scheme.getSchemeTemplate()
+    template {
+        properties(schemeTemplate.getTemplateProperties()) { SchemeTemplateProperty p ->
+            id             p.getProperty().getId()
+            name           p.getProperty().getName()
+            isCompulsory   p.getProperty().getIsCompulsory()
+            orderedCourses p.getOrderedCourses()
+            hasDirections  p.getHasDirections()
+            displayOrder   p.getDisplayOrder()
+        }
+        terms(schemeTemplate.getTemplateTerms()) { SchemeTemplateTerm t ->
+            term         t.getTerm()
+            title        t.getTitle()
+            displayOrder t.getDisplayOrder()
+        }
+    }
+}

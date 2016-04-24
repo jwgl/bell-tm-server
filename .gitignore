@@ -1,0 +1,6 @@
+.gradle
+classes
+.idea
+build
+tm-imp
+tm-web/.asscache

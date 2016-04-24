@@ -1,0 +1,6 @@
+rootProject.name = 'bell-tm-server'
+
+include 'tm-uaa'
+include 'tm-api'
+include 'tm-web'
+
