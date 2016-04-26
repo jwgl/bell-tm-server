@@ -127,7 +127,7 @@ order by subject.id, major.grade desc, s.versionNumber desc
         }
 
         // 除获取当前指定版本数据外，还需查询出被当前版本修改的项
-        scheme.courses.addAll(schemePublicService.getRevisedSchemeCoursesInfo(scheme.programId, scheme.versionNumber))
+        scheme.courses.addAll(schemePublicService.getRevisedSchemeCoursesInfo(id))
 
         return scheme
     }
@@ -172,12 +172,14 @@ select new Dto (
   program.id as programId,
   program.type as programType,
   subject.name as subjectName,
+  department.id as departmentId,
   major.grade as grade,
   program.credit as credit
 )
 from Program program
 join program.major major
 join major.subject subject
+join major.department department
 where program.id = :programId
 ''', [programId: programId])
 

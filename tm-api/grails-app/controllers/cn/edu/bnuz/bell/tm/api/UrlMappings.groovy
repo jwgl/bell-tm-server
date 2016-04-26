@@ -10,6 +10,7 @@ class UrlMappings {
             "/workitems"(action: 'workitems', includes: ['index'], method: 'GET')
         }
 
+        // 按用户获取信息
         "/users"(resources: 'user', includes: []) {
             "/works"(resources: 'workitem', includes: ['index']) {
                 collection {
@@ -27,8 +28,11 @@ class UrlMappings {
             }
         }
 
+        // 按学院获取信息
         "/departments"(resources: 'department', includes: []) {
             "/visions"(controller: 'visionPublic', action: 'indexByDepartment', method: 'GET')
+            "/schemes"(controller: 'schemePublic', action: 'indexByDepartment', method: 'GET')
+            "/schemeDirections"(controller: 'schemePublic', action: 'schemeDirectionsByDepartment', method: 'GET')
         }
 
         // 培养方案
@@ -42,6 +46,12 @@ class UrlMappings {
         "/schemes"(resources: 'schemePublic', includes: ['index', 'show']) {
             "/reviews"(resources: 'schemeReview', includes: ['show', 'patch']) {
                 "/approvers"(controller: 'schemeReview', action: 'approvers', method: 'GET')
+            }
+            "/properties"(resources: 'property', includes: []) {
+                "/courses"(controller: 'schemePublic', action: 'propertyCourses', method: 'GET')
+            }
+            "/directions"(resources: 'direction', includes: []) {
+                "/courses"(controller: 'schemePublic', action: 'directionCourses', method: 'GET')
             }
         }
 
