@@ -14,6 +14,7 @@ class SchemeDto {
     Integer programId
     Integer programType
     String subjectName
+    String departmentId
     Integer grade
     Integer credit
     AuditStatus status
@@ -35,6 +36,7 @@ class SchemeDto {
             Integer programId,
             Integer programType,
             String subjectName,
+            String departmentId,
             Integer grade,
             Integer credit,
             AuditStatus status,
@@ -46,6 +48,7 @@ class SchemeDto {
         this.programId = programId
         this.programType = programType
         this.subjectName = subjectName
+        this.departmentId = departmentId
         this.grade = grade
         this.credit = credit
         this.status = status
@@ -56,11 +59,13 @@ class SchemeDto {
             Integer programId,
             Integer programType,
             String subjectName,
+            String departmentId,
             Integer grade,
             Integer credit) {
         this.programId = programId
         this.programType = programType
         this.subjectName = subjectName
+        this.departmentId = departmentId
         this.grade = grade
         this.credit = credit
         this.versionNumber = Scheme.INITIAL_VERSION

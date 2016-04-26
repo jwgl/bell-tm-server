@@ -72,6 +72,68 @@ order by department.id, subject.id, program.id, major.grade
         }
     }
 
+
+    /**
+     * 按学院获取列表
+     * @param departmentId 学院ID
+     */
+    def getSchemesByDepartment(String departmentId) {
+        def startGrade = termService.minInSchoolGrade
+        Scheme.executeQuery '''
+select new map(
+  s.id as id,
+  subject.name as subjectName,
+  major.grade as grade
+)
+from Scheme s
+join s.program program
+join program.major major
+join major.subject subject
+join subject.department department
+where subject.isTopUp = false
+and major.degree is not null
+and major.grade >= :startGrade
+and department.id = :departmentId
+and s.versionNumber = (
+  select max(s2.versionNumber)
+  from Scheme s2
+  where s2.status = :status
+  and s2.program = s.program
+)
+order by major.grade desc, subject.id
+''', [startGrade: startGrade, departmentId: departmentId, status: AuditStatus.APPROVED]
+    }
+
+    def getSchemeDirectionsByDepartment(String departmentId) {
+        def startGrade = termService.minInSchoolGrade
+        Scheme.executeQuery '''
+select new map(
+  s.id as schemeId,
+  subject.name as subjectName,
+  major.grade as grade,
+  direction.id as directionId,
+  direction.name as directionName
+)
+from Scheme s
+join s.program program
+join program.major major
+join major.subject subject
+join subject.department department
+join major.directions direction
+where subject.isTopUp = false
+and major.degree is not null
+and major.grade >= :startGrade
+and department.id = :departmentId
+and s.versionNumber = (
+  select max(s2.versionNumber)
+  from Scheme s2
+  where s2.status = :status
+  and s2.program = s.program
+)
+order by major.grade desc, subject.id
+''', [startGrade: startGrade, departmentId: departmentId, status: AuditStatus.APPROVED]
+    }
+
     /**
      * 获取指定的方案信息（用于显示）。
      *
@@ -88,6 +150,7 @@ select new Dto (
   program.id,
   program.type,
   subject.name,
+  department.id as departmentId,
   major.grade,
   program.credit,
   scheme.status,
@@ -97,11 +160,12 @@ from Scheme scheme
 join scheme.program program
 join program.major major
 join major.subject subject
+join major.department department
 left join scheme.previous prev
 where scheme.id = :id
 ''', [id: id]
 
-        scheme.courses = getSchemeCoursesInfo(scheme.programId, scheme.versionNumber)
+        scheme.courses = getSchemeCoursesInfo(id)
         scheme.tempCourses = getSchemeTempCoursesInfo(id)
         scheme.template = programService.getSchemeTemplateInfo(scheme.programId)
         scheme.directions = programService.getProgramDirections(scheme.programId)
@@ -111,11 +175,10 @@ where scheme.id = :id
 
     /**
      * 获取指定版本的课程信息
-     * @param programId 教学计划ID
-     * @param versionNumber 版本号
+     * @param schemeId Scheme ID
      * @return 课程信息列表
      */
-    List getSchemeCoursesInfo(Integer programId, Integer versionNumber) {
+    List getSchemeCoursesInfo(Long schemeId) {
         SchemeCourse.executeQuery '''
 select new map(
   sc.id as id,
@@ -138,16 +201,18 @@ select new map(
 )
 from SchemeCourse sc
 join sc.course c
-join sc.scheme s
-where s.program.id = :programId
-and s.versionNumber <= :versionNumber
-and (sc.reviseVersion is null or sc.reviseVersion > :versionNumber)
-''', [programId: programId, versionNumber: versionNumber]
+join sc.scheme s,
+Scheme scheme
+where scheme.id = :schemeId
+and s.program = scheme.program
+and s.versionNumber <= scheme.versionNumber
+and (sc.reviseVersion is null or sc.reviseVersion > scheme.versionNumber)
+''', [schemeId: schemeId]
     }
 
     /**
      * 获取指定的方案的临时课程信息
-     * @param id 方案ID
+     * @param id Scheme ID
      * @return 方案的临时课程信息列表
      */
     List getSchemeTempCoursesInfo(Long schemeId) {
@@ -178,12 +243,11 @@ where sc.scheme.id = :schemeId
     }
 
     /**
-     * 获取指定版本修订的课程信息
-     * @param programId 教学计划ID
-     * @param versionNumber 版本号
+     * 获取当前计划版本修订的课程信息
+     * @param schemeId Scheme ID
      * @return 课程信息列表
      */
-    List getRevisedSchemeCoursesInfo(Integer programId, Integer versionNumber) {
+    List getRevisedSchemeCoursesInfo(Long schemeId) {
         SchemeCourse.executeQuery '''
 select new map(
   sc.id as id,
@@ -207,9 +271,9 @@ select new map(
 from SchemeCourse sc
 join sc.course c
 join sc.scheme s
-where s.program.id = :programId
-and sc.reviseVersion = :versionNumber
-''', [programId: programId, versionNumber: versionNumber]
+where s.id = :schemeId
+and sc.reviseVersion = s.versionNumber
+''', [schemeId: schemeId]
     }
 
     /**
@@ -231,5 +295,31 @@ where scheme.program.id = :programId
 ''', [programId: programId, status: AuditStatus.APPROVED]
 
         results ? results[0] : null
+    }
+
+    /**
+     * 获取指定ID和性质的课程信息
+     * @param schemeId Scheme ID
+     * @param propertyId 性质ID
+     * @return 课程列表
+     */
+    def getPropertyCourses(Long schemeId, Integer propertyId) {
+        def results = []
+        results.addAll this.getSchemeCoursesInfo(schemeId)
+        results.addAll this.getSchemeTempCoursesInfo(schemeId)
+        results.findAll {it.propertyId == propertyId}
+    }
+
+    /**
+     * 获取指定ID和方向的课程信息
+     * @param schemeId Scheme ID
+     * @param directionId 方向ID
+     * @return 课程列表
+     */
+    def getDirectionCourses(Long schemeId, Integer directionId) {
+        def results = []
+        results.addAll this.getSchemeCoursesInfo(schemeId)
+        results.addAll this.getSchemeTempCoursesInfo(schemeId)
+        results.findAll {it.directionId == directionId}
     }
 }
