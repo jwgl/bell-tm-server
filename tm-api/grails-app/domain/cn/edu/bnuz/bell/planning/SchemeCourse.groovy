@@ -1,7 +1,6 @@
 package cn.edu.bnuz.bell.planning
 
 import cn.edu.bnuz.bell.master.Course
-import cn.edu.bnuz.bell.master.Direction
 import cn.edu.bnuz.bell.master.Period
 import cn.edu.bnuz.bell.master.Property
 
