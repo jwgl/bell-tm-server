@@ -116,10 +116,10 @@ select new map(
 )
 from Scheme s
 join s.program program
+join program.directions direction
 join program.major major
 join major.subject subject
-join subject.department department
-join major.directions direction
+join major.department department
 where subject.isTopUp = false
 and major.degree is not null
 and major.grade >= :startGrade

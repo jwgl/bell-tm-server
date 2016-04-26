@@ -114,8 +114,7 @@ select new map(
  direction.name as name
 )
 from Program program
-join program.major major
-join major.directions direction
+join program.directions direction
 where program.id = :programId
 order by direction.id
 ''', [programId: programId]
