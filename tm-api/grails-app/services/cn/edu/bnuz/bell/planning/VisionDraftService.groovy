@@ -148,6 +148,7 @@ select new map(
   program.id as programId,
   program.type as programType,
   subject.name as subjectName,
+  major.department.id as departmentId
   major.grade as grade
 )
 from Program program
@@ -173,7 +174,6 @@ where program.id = :programId
         vision.previousId = null
         vision.previousVersionNumber = 0
         vision.versionNumber = Vision.INITIAL_VERSION
-        vision.primaryCourses = visionPublicService.getPrimaryCourses(vision.programId)
         vision.schemeId = schemePublicService.getLatestSchemeId(programId)
 
         return vision

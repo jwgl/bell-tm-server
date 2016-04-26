@@ -2,6 +2,7 @@ package cn.edu.bnuz.bell.planning
 
 import cn.edu.bnuz.bell.http.NotFoundException
 import cn.edu.bnuz.bell.master.TermService
+import cn.edu.bnuz.bell.service.DataAccessService
 import cn.edu.bnuz.bell.utils.CollectionUtils
 import cn.edu.bnuz.bell.utils.GroupCondition
 import cn.edu.bnuz.bell.workflow.AuditStatus
@@ -13,6 +14,7 @@ import cn.edu.bnuz.bell.workflow.AuditStatus
 class VisionPublicService {
     SchemePublicService schemePublicService
     TermService termService
+    DataAccessService dataAccessService
 
     /**
      * 获取已审核培养方案（除专升本和课程班）
@@ -119,6 +121,7 @@ select new map(
   program.id as programId,
   program.type as programType,
   subject.name as subjectName,
+  major.department.id as departmentId,
   major.grade as grade,
   vision.objective as objective,
   vision.specification as specification,
@@ -142,23 +145,8 @@ where vision.id = :id
 
         def vision = results[0]
         Integer programId = vision.programId
-        vision.primaryCourses = getPrimaryCourses(programId)
         vision.schemeId = schemePublicService.getLatestSchemeId(programId)
 
         vision
-    }
-
-    // TODO: 获取SchemeCourse而不是ProgramCourse
-    def getPrimaryCourses(Integer programId) {
-        ProgramCourse.executeQuery '''
-select course.name
-from ProgramCourse pc
-join pc.course course
-join pc.program program
-join pc.property property
-where property.isPrimary = true
-and program.id = :programId
-order by pc.suggestedTerm
-''', [programId: programId]
     }
 }
