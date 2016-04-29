@@ -8,7 +8,6 @@ hibernate:
         region.factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
     hbm2ddl:
         schema_filter_provider: 'cn.edu.bnuz.bell.orm.BellSchemaFilterProvider'
-        create_namespaces: true
 
 dataSource:
     configClass: cn.edu.bnuz.bell.orm.BellHibernateMappingContextConfiguration
