@@ -63,9 +63,9 @@ class UrlMappings {
 
         "/"(controller: 'application', action:'index')
 
-        "500"(view: '/application/serverError')
-        "404"(view: '/application/notFound')
-        "403"(view: '/application/forbidden')
-        "401"(view: '/application/unauthorized')
+        "500"(view: '/error')
+        "404"(view: '/notFound')
+        "403"(view: '/forbidden')
+        "401"(view: '/unauthorized')
     }
 }
