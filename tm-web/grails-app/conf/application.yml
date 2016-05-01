@@ -5,14 +5,16 @@ hibernate:
         use_second_level_cache: true
         use_query_cache: false
         region.factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
+    default_schema: tm
     hbm2ddl:
         schema_filter_provider: 'cn.edu.bnuz.bell.orm.BellSchemaFilterProvider'
 
 dataSource:
-    configClass: cn.edu.bnuz.bell.orm.BellHibernateMappingContextConfiguration
     pooled: true
     jmxExport: true
     driverClassName: org.postgresql.Driver
+    dialect: cn.edu.bnuz.bell.orm.PostgreSQL95Dialect
+    configClass: cn.edu.bnuz.bell.orm.BellHibernateMappingContextConfiguration
 
 environments:
     development:
@@ -112,8 +114,6 @@ endpoints:
         unique-names: true
 
 security:
-    user:
-        password: password
     oauth2:
         client:
             accessTokenUri: http://localhost/uaa/oauth/token

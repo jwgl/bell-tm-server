@@ -8,10 +8,12 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy
 import org.springframework.context.EnvironmentAware
 import org.springframework.context.annotation.Bean
 import org.springframework.core.env.Environment
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.web.context.request.RequestContextListener
 
 @SpringBootApplication
 @EnableZuulProxy
+@EnableGlobalMethodSecurity(securedEnabled = true)
 class Application extends GrailsAutoConfiguration implements EnvironmentAware{
 
     static void main(String[] args) {

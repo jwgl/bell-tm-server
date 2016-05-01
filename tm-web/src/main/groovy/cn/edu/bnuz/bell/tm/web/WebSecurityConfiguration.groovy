@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletResponse
 
 @Configuration
 @EnableOAuth2Sso
-//@EnableGlobalMethodSecurity(securedEnabled = true)
 class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
