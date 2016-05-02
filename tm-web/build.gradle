@@ -62,7 +62,7 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
     // postgres
-    runtime "org.postgresql:postgresql:$postgresVersion"
+    compile "org.postgresql:postgresql:$postgresVersion"
     // hibernate 5
     compile "org.grails.plugins:hibernate5:$pluginHibernate5Version"
     compile "org.hibernate:hibernate-core:$hibernateVersion"

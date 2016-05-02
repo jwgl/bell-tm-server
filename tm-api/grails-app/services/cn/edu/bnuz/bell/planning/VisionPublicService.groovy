@@ -149,4 +149,19 @@ where vision.id = :id
 
         vision
     }
+
+    /**
+     * 获取缓存的Vision信息
+     * @param id Vision ID
+     * @return JSONElement
+     */
+    def getCachedVisionInfo(Long id) {
+        def vision = dataAccessService.getJson 'select jsonValue from Vision where id = :id', [id: id]
+        if (!vision) {
+            def info = getVisionInfo(id)
+            Vision.executeUpdate 'update Vision set jsonValue = :value where id = :id', [id: id, value: info]
+            vision = dataAccessService.getJson 'select jsonValue from Vision where id = :id', [id: id]
+        }
+        vision
+    }
 }

@@ -1,9 +1,11 @@
 package cn.edu.bnuz.bell.planning
 
+import cn.edu.bnuz.bell.orm.PostgreSQLJsonUserType
 import cn.edu.bnuz.bell.workflow.AuditAction
 import cn.edu.bnuz.bell.workflow.AuditStatus
 import cn.edu.bnuz.bell.security.User
 import cn.edu.bnuz.bell.workflow.WorkflowInstance
+import org.grails.web.json.JSONElement
 
 /**
  * 培养方案-目标与规格
@@ -60,6 +62,11 @@ class Vision {
      */
     WorkflowInstance workflowInstance
 
+    /**
+     * JSON表示
+     */
+    JSONElement jsonValue
+
     static mapping = {
         comment             '培养方案-目标与规格'
         id                  generator: 'identity', comment: '培养方案-目标与规格ID'
@@ -72,6 +79,7 @@ class Vision {
         awardedDegree       length: 1000, comment: '授予学位'
         previous            comment: '上一版本'
         workflowInstance    comment: '工作流实例'
+        jsonValue           type: PostgreSQLJsonUserType, comment: 'JSON表示'
     }
 
     static constraints = {
@@ -79,6 +87,7 @@ class Vision {
         awardedDegree        nullable: true, maxSize: 1000
         previous             nullable: true
         workflowInstance     nullable: true
+        jsonValue            nullable: true
     }
 
     Boolean allowAction(AuditAction action) {

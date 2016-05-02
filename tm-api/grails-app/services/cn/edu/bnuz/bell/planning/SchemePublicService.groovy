@@ -277,6 +277,21 @@ and sc.reviseVersion = s.versionNumber
     }
 
     /**
+     * 获取缓存的Scheme信息
+     * @param id Scheme ID
+     * @return JSONElement
+     */
+    def getCachedSchemeInfo(Long id) {
+        def scheme = dataAccessService.getJson 'select jsonValue from Scheme where id = :id', [id: id]
+        if (!scheme) {
+            def info = getSchemeInfo(id)
+            Scheme.executeUpdate 'update Scheme set jsonValue = :value where id = :id', [id: id, value: info]
+            scheme = dataAccessService.getJson 'select jsonValue from Scheme where id = :id', [id: id]
+        }
+        scheme
+    }
+
+    /**
      * 获取最新已审批的SchemeId
      * @param programId 教学计划ID
      * @return Scheme ID

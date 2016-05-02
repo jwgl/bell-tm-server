@@ -29,7 +29,7 @@ class SchemePublicController implements ServiceExceptionHandler {
     }
 
     def show(Long id) {
-        renderJson schemePublicService.getSchemeInfo(id)
+        renderJson schemePublicService.getCachedSchemeInfo(id)
     }
 
     def propertyCourses(Long schemePublicId, Integer propertyId) {

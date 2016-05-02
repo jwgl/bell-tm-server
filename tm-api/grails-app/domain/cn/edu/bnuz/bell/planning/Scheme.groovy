@@ -1,9 +1,11 @@
 package cn.edu.bnuz.bell.planning
 
+import cn.edu.bnuz.bell.orm.PostgreSQLJsonUserType
 import cn.edu.bnuz.bell.security.User
 import cn.edu.bnuz.bell.workflow.AuditAction
 import cn.edu.bnuz.bell.workflow.AuditStatus
 import cn.edu.bnuz.bell.workflow.WorkflowInstance
+import org.grails.web.json.JSONElement
 
 /**
  * 培养方案-教学安排
@@ -35,9 +37,15 @@ class Scheme {
      */
     Scheme previous
 
-    Set<SchemeCourse> courses
-
+    /**
+     * 工作流实例
+     */
     WorkflowInstance workflowInstance
+
+    /**
+     * JSON表示
+     */
+    JSONElement jsonValue
 
     static hasMany = [
         courses: SchemeCourse,
@@ -52,27 +60,14 @@ class Scheme {
         program             comment: '教学计划'
         previous            comment: '上一版本'
         workflowInstance    comment: '工作流实例'
+        jsonValue           type: PostgreSQLJsonUserType, comment: 'JSON表示'
     }
 
     static constraints = {
         previous            nullable: true
         workflowInstance    nullable: true
+        jsonValue           nullable: true
     }
-
-    /**
-     * 操作常数：新建
-     */
-    static Integer OP_CREATE = 0
-
-    /**
-     * 操作常数：更新
-     */
-    static Integer OP_UPDATE = 1
-
-    /**
-     * 操作常数：删除
-     */
-    static Integer OP_DELETE = 2
 
     String getWorkflowId() {
         this.previous ? 'scheme.revise' : 'scheme.create'

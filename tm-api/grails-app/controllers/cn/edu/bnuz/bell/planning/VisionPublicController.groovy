@@ -32,6 +32,6 @@ class VisionPublicController implements ServiceExceptionHandler {
      * @param id 培养方案ID
      */
     def show(Long id) {
-        renderJson visionPublicService.getVisionInfo(id)
+        renderJson visionPublicService.getCachedVisionInfo(id)
     }
 }
