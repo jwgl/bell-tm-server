@@ -41,7 +41,7 @@
     <script src="/static/js/lib/bootstrap.min.js"></script>
     <script src="/static/js/lib/bootstrap-submenu.min.js"></script>
     <script src="/static/js/app/common.js"></script>
-    <script src="/static/js/app/angular2.js"></script>
+    <script src="/static/js/app/angular.js"></script>
     <script src="/static/js/app/logo.js"></script>
     <script src="/static/js/app/menu.js"></script>
     <asset:deferredScripts/>
