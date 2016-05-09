@@ -139,8 +139,6 @@ logging:
 #        org.springframework.security: DEBUG
 
 bell:
-    api:
-        baseUrl: http://localhost/api
     orm:
         ignored:
             schemas:
