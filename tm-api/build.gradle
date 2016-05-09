@@ -22,6 +22,7 @@ apply plugin:"idea"
 apply plugin:"war"
 apply plugin:"org.grails.grails-web"
 apply plugin:"org.grails.plugins.views-json"
+apply plugin:"spring-boot"
 
 ext {
     grailsVersion = project.grailsVersion
@@ -58,16 +59,14 @@ dependencies {
     compile "org.grails:grails-logging"
     compile "org.grails.plugins:cache"
     compile "org.grails.plugins:views-json"
-    console "org.grails:grails-console"
     profile "org.grails.profiles:rest-api:3.1.6"
-    runtime "com.h2database:h2"
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
     testCompile "org.grails:grails-datastore-rest-client"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
     // postgres
-    compile "org.postgresql:postgresql:$postgresVersion"
+    runtime "org.postgresql:postgresql"
     // hibernate 5
     compile "org.grails.plugins:hibernate5:$pluginHibernate5Version"
     compile "org.hibernate:hibernate-core:$hibernateVersion"
@@ -83,4 +82,8 @@ dependencies {
 
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
+}
+
+springBoot {
+    executable = true
 }
