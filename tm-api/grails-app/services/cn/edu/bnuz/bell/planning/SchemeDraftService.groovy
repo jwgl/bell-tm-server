@@ -127,7 +127,9 @@ order by subject.id, major.grade desc, s.versionNumber desc
         }
 
         // 除获取当前指定版本数据外，还需查询出被当前版本修改的项
-        scheme.courses.addAll(schemePublicService.getRevisedSchemeCoursesInfo(id))
+        if (scheme.previousId) {
+            scheme.courses.addAll(schemePublicService.getRevisedSchemeCoursesInfo(id))
+        }
 
         return scheme
     }
@@ -541,7 +543,7 @@ where scheme.id = :id
      * @param departmentId 学院ID
      * @return 课程列表
      */
-    def findCoursesByNameOrId(String query, String departmentId) {
+    def findCoursesByNameOrId(String query, Integer type, String departmentId) {
         SchemeCourseDto.executeQuery '''
 select new Map(
   id as id,
@@ -557,7 +559,8 @@ select new Map(
 from SchemeCourseDto
 where (id like :id or name like :name)
 and (isTempCourse = false or departmentId = :departmentId)
+and (:type = 0 or :type = 1 and isTempCourse = false or :type = 2 and isTempCourse = true)
 order by locate(:query, id), locate(:query, name), id
-''', [id: "%${query}%", name: "%${query}%", query: query, departmentId: departmentId], [max: 100]
+''', [id: "%${query}%", name: "%${query}%", query: query, type: type, departmentId: departmentId], [max: 100]
     }
 }

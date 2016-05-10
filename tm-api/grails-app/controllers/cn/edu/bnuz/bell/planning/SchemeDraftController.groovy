@@ -140,9 +140,10 @@ class SchemeDraftController implements ServiceExceptionHandler {
      */
     def courses() {
         String query = params.q
-        if(!query) {
+        Integer type = params.int('t')
+        if (query == null || type == null) {
             throw new BadRequestException()
         }
-        renderJson schemeDraftService.findCoursesByNameOrId(query, securityService.departmentId)
+        renderJson schemeDraftService.findCoursesByNameOrId(query, type, securityService.departmentId)
     }
 }

@@ -270,9 +270,11 @@ select new map(
 )
 from SchemeCourse sc
 join sc.course c
-join sc.scheme s
-where s.id = :schemeId
-and sc.reviseVersion = s.versionNumber
+join sc.scheme s,
+Scheme scheme
+where scheme.id = :schemeId
+and s.program =  scheme.program
+and sc.reviseVersion = scheme.versionNumber
 ''', [schemeId: schemeId]
     }
 

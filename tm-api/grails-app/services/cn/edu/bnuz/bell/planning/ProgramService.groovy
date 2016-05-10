@@ -20,12 +20,13 @@ and sd.teacher.id = :userId
 ''', [programId: programId, userId: userId]
     }
 
-    Integer getDepartmentId(Integer programId) {
+    String getDepartmentId(Integer programId) {
         dataAccessService.getString '''
 select s.department.id
 from Program p
 join p.major m
 join m.subject s
+where p.id = :programId
 ''', [programId: programId]
     }
 
