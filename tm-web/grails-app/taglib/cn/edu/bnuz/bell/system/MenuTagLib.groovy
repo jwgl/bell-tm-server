@@ -59,6 +59,7 @@ class MenuTagLib {
             sb << '<div class="dropdown-menu">'
             menu.items.each { create(it, sb, level + 1, locale) }
             sb << '</div>'
+            sb << '</div>'
         } else {
             if(menu.url) {
                 sb << '<a class="dropdown-item" href="'
@@ -66,7 +67,7 @@ class MenuTagLib {
                     sb << menu.url << '" target="_blank'
                 } else {
                     sb << createLink(uri: menu.url.replace('${userId}', securityService.userId))
-                }   
+                }
                 sb << '">'
                 sb << (locale.country == 'CN' ? menu.labelCn : menu.labelEn)
                 sb << '</a>'
