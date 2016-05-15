@@ -6,6 +6,8 @@ class UrlMappings {
         // 公共服务
         "/fields"(resources: 'field', includes: ['index'])
 
+        "/teachers"(resources: 'teacher', includes: ['index'])
+
         "/workflows"(resources: 'workflow', includes: []) {
             "/workitems"(action: 'workitems', includes: ['index'], method: 'GET')
         }
@@ -54,6 +56,9 @@ class UrlMappings {
                 "/courses"(controller: 'schemePublic', action: 'directionCourses', method: 'GET')
             }
         }
+
+        // 专业负责人
+        "/subjectDirectors"(resources: 'subjectDirector', includes: ['index', 'save'])
 
         "/$controller/$action?/$id?(.$format)?"{
             constraints {

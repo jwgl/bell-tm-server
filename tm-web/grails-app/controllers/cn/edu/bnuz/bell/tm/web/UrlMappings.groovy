@@ -23,6 +23,10 @@ class UrlMappings {
             "/schemes"(resources: 'schemeDraft', includes: ['index', 'show'])
         }
 
+        group "/settings", {
+            "/subject"(controller: "subjectSetup")
+        }
+
         "/$controller/$action?/$id?(.$format)?"{
             constraints {
                 // apply constraints here

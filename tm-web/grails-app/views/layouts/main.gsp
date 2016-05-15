@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><g:layoutTitle default="BELL"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
     <link rel="stylesheet" href="/static/css/lib/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/lib/bootstrap-submenu.min.css">
     <link rel="stylesheet" href="/static/css/lib/font-awesome.min.css">
@@ -42,8 +43,8 @@
     <script src="/static/js/lib/bootstrap-submenu.min.js"></script>
     <script src="/static/js/app/common.js"></script>
     <script src="/static/js/app/angular.js"></script>
+    <asset:deferredScripts/>
     <script src="/static/js/app/logo.js"></script>
     <script src="/static/js/app/menu.js"></script>
-    <asset:deferredScripts/>
 </body>
 </html>
