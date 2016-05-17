@@ -57,16 +57,17 @@ class UrlMappings {
             }
         }
 
+        "/schemeTemplates"(resources: 'schemeTemplate', includes: ['index'])
+
         // 专业负责人
         "/subjectDirectors"(resources: 'subjectDirector', includes: ['index', 'save'])
 
-        "/$controller/$action?/$id?(.$format)?"{
-            constraints {
-                // apply constraints here
+        // 计划设置
+        "/programSettings"(resources: 'programSettings', includes: ['index', 'patch']) {
+            collection {
+                "/grades"(controller: 'programSettings', action: 'grades', method: 'GET')
             }
         }
-
-        "/"(controller: 'application', action:'index')
 
         "500"(view: '/error')
         "404"(view: '/notFound')
