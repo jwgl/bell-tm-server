@@ -25,6 +25,7 @@ class UrlMappings {
 
         group "/settings", {
             "/subject"(controller: "subjectSetup")
+            "/program"(controller: "programSetup")
         }
 
         "/$controller/$action?/$id?(.$format)?"{

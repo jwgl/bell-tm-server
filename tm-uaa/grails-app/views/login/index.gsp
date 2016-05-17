@@ -58,11 +58,11 @@
 <div class="container">
     <form class="form-signin" action='/uaa/login' method='POST' id='loginForm' autocomplete='off'>
         <div class="input-group">
-            <span class="input-group-addon"><span class="fa fa-user"></span></span>
+            <span class="input-group-addon"><span class="fa fa-user fa-fw"></span></span>
             <input type='text' class='form-control' name='username' id='username' placeholder="用户名" />
         </div>
         <div class="input-group">
-            <span class="input-group-addon"><span class="fa fa-lock"></span></span>
+            <span class="input-group-addon"><span class="fa fa-lock fa-fw"></span></span>
             <input type='password' class='form-control' name='password' id='password' placeholder="密码" />
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
