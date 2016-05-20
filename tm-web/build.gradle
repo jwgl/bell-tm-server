@@ -1,6 +1,7 @@
 buildscript {
     ext {
         grailsVersion = project.grailsVersion
+        pluginHibernate5Version = project.pluginHibernate5Version
     }
     repositories {
         mavenLocal()
@@ -27,6 +28,8 @@ apply plugin:"spring-boot"
 ext {
     grailsVersion = project.grailsVersion
     gradleWrapperVersion = project.gradleWrapperVersion
+    pluginHibernate5Version = project.pluginHibernate5Version
+    hibernateVersion = project.hibernateVersion
 }
 
 repositories {
@@ -38,8 +41,8 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom "org.grails:grails-bom:$grailsVersion"
-        mavenBom 'org.springframework.cloud:spring-cloud-netflix:1.1.0.RC1'
-        mavenBom 'org.springframework.cloud:spring-cloud-security-parent:1.1.0.RC1'
+        mavenBom 'org.springframework.cloud:spring-cloud-netflix:1.1.0.RELEASE'
+        mavenBom 'org.springframework.cloud:spring-cloud-security-parent:1.1.0.RELEASE'
     }
     applyMavenExclusions false
 }
@@ -54,7 +57,7 @@ dependencies {
     compile "org.grails:grails-web-boot"
     compile "org.grails.plugins:cache"
     console "org.grails:grails-console"
-    profile "org.grails.profiles:web:3.1.6"
+    profile "org.grails.profiles:web:3.1.7"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.8.2"
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"

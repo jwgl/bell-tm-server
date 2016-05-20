@@ -126,7 +126,7 @@ server:
     contextPath: /uaa
 logging:
     level:
-        org.springframework.security: DEBUG
+        #org.springframework.security: DEBUG
 
 bell:
     orm:
