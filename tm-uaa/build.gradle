@@ -28,6 +28,8 @@ apply plugin:"spring-boot"
 ext {
     grailsVersion = project.grailsVersion
     gradleWrapperVersion = project.gradleWrapperVersion
+    pluginHibernate5Version = project.pluginHibernate5Version
+    hibernateVersion = project.hibernateVersion
 }
 
 repositories {
@@ -52,7 +54,7 @@ dependencies {
     compile "org.grails:grails-web-boot"
     compile "org.grails.plugins:cache"
     console "org.grails:grails-console"
-    profile "org.grails.profiles:web:3.1.6"
+    profile "org.grails.profiles:web:3.1.7"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.8.2"
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
