@@ -18,7 +18,7 @@ class SchemeDto {
     Integer grade
     Integer credit
     AuditStatus status
-    String workflowInstanceId
+    UUID workflowInstanceId
 
     Boolean editable
     Boolean revisable
@@ -40,7 +40,7 @@ class SchemeDto {
             Integer grade,
             Integer credit,
             AuditStatus status,
-            String workflowInstanceId) {
+            UUID workflowInstanceId) {
         this.id = id
         this.versionNumber = versionNumber
         this.previousId = previousId
