@@ -22,7 +22,7 @@ class SchemeReviewService {
      * @param workitemId 工作项ID
      * @return 审核数据
      */
-    def getSchemeForReview(Long id, String userId, String workitemId) {
+    def getSchemeForReview(Long id, String userId, UUID workitemId) {
         def scheme = schemePublicService.getSchemeInfo(id)
 
         Workitem workItem = Workitem.get(workitemId)
@@ -56,7 +56,7 @@ class SchemeReviewService {
      * @param userId 用户ID
      * @param workItemId 工作项ID
      */
-    void accept(AcceptCommand cmd, String userId, String workItemId) {
+    void accept(AcceptCommand cmd, String userId, UUID workItemId) {
         Scheme scheme = Scheme.get(cmd.id)
 
         if (!scheme) {
@@ -102,7 +102,7 @@ class SchemeReviewService {
      * @param userId 用户ID
      * @param workItemId 工作项ID
      */
-    void reject(RejectCommand cmd, String userId, String workItemId) {
+    void reject(RejectCommand cmd, String userId, UUID workItemId) {
         Scheme scheme = Scheme.get(cmd.id)
 
         if (!scheme) {

@@ -12,7 +12,7 @@ import org.springframework.security.access.annotation.Secured
  * 培养方案审核控制器。
  * @author Yang Lin
  */
-@Secured(PlanningPerms.ROLE_VISION_CHECK)
+@Secured([PlanningPerms.ROLE_VISION_CHECK, PlanningPerms.ROLE_VISION_APPROVE])
 class VisionReviewController implements ServiceExceptionHandler {
     SecurityService securityService
     VisionReviewService visionReviewService
@@ -24,7 +24,7 @@ class VisionReviewController implements ServiceExceptionHandler {
      * @return
      */
     def show(Long visionPublicId, String id) {
-        renderJson visionReviewService.getVisionForReview(visionPublicId, securityService.userId, id)
+        renderJson visionReviewService.getVisionForReview(visionPublicId, securityService.userId, UUID.fromString(id))
     }
 
     /**
@@ -42,13 +42,13 @@ class VisionReviewController implements ServiceExceptionHandler {
                 def cmd = new AcceptCommand()
                 bindData(cmd, request.JSON)
                 cmd.id = visionPublicId
-                visionReviewService.accept(cmd, userId, id)
+                visionReviewService.accept(cmd, userId, UUID.fromString(id))
                 break
             case AuditAction.REJECT:
                 def cmd = new RejectCommand()
                 bindData(cmd, request.JSON)
                 cmd.id = visionPublicId
-                visionReviewService.reject(cmd, userId, id)
+                visionReviewService.reject(cmd, userId, UUID.fromString(id))
                 break
             default:
                 throw new BadRequestException()

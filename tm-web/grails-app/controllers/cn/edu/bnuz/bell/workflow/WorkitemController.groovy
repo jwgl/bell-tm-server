@@ -16,7 +16,8 @@ class WorkitemController {
 
     def show(String id) {
         def userId = securityService.userId
-        Workitem workItem = Workitem.get(id)
+        def uuid = UUID.fromString(id)
+        Workitem workItem = Workitem.get(uuid)
         if (!workItem || workItem.to.id != userId) {
             return renderNotFound()
         }
@@ -28,7 +29,7 @@ class WorkitemController {
 
         // 如果审批结束，最后工作项的操作为"同意"(ACCEPT)，活动为"查看"(*.view)
         if (!workItem.dateProcessed && workItem.action == AuditAction.ACCEPT && workItem.activity.id.endsWith('.view')) {
-            workflowService.setProcessed(id)
+            workflowService.setProcessed(uuid)
         }
 
         redirect uri: workItem.activity.url

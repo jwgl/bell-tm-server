@@ -46,12 +46,15 @@ class Scheme {
 
     static mapping = {
         comment             '教学计划'
+        dynamicUpdate       true
         id                  generator: 'identity', comment: '培养方案-教学安排ID'
         versionNumber       comment: '版本号'
         status              defaultValue: "0", comment: '状态-0：新建；1-待审核；2-待审批；3：不通过；4：通过'
         program             comment: '教学计划'
         previous            comment: '上一版本'
         workflowInstance    comment: '工作流实例'
+        courses             cascade: 'all-delete-orphan'
+        tempCourses         cascade: 'all-delete-orphan'
     }
 
     static constraints = {

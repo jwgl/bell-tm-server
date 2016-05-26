@@ -63,7 +63,10 @@ class VisionDraftController implements ServiceExceptionHandler{
             def vision = visionDraftService.revise(cmd, userId)
             renderJson([id: vision.id])
         } else {
-            throw new BadRequestException()
+            def cmd = new VisionCreateCommand()
+            bindData(cmd, request.JSON)
+            def vision = visionDraftService.create(cmd, userId)
+            renderJson([id: vision.id])
         }
     }
 

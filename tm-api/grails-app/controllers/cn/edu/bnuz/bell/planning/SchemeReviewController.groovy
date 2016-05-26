@@ -12,7 +12,7 @@ import org.springframework.security.access.annotation.Secured
  * 教学计划审核
  * @author Yang Lin
  */
-@Secured(PlanningPerms.ROLE_SCHEME_CHECK)
+@Secured([PlanningPerms.ROLE_SCHEME_CHECK, PlanningPerms.ROLE_SCHEME_APPROVE])
 class SchemeReviewController implements ServiceExceptionHandler {
     SecurityService securityService
     SchemeReviewService schemeReviewService
@@ -23,7 +23,7 @@ class SchemeReviewController implements ServiceExceptionHandler {
      * @param id Workitem ID
      */
     def show(Long schemePublicId, String id) {
-        renderJson schemeReviewService.getSchemeForReview(schemePublicId, securityService.userId, id)
+        renderJson schemeReviewService.getSchemeForReview(schemePublicId, securityService.userId, UUID.fromString(id))
     }
 
 
@@ -42,13 +42,13 @@ class SchemeReviewController implements ServiceExceptionHandler {
                 def cmd = new AcceptCommand()
                 bindData(cmd, request.JSON)
                 cmd.id = schemePublicId
-                schemeReviewService.accept(cmd, userId, id)
+                schemeReviewService.accept(cmd, userId, UUID.fromString(id))
                 break
             case AuditAction.REJECT:
                 def cmd = new RejectCommand()
                 bindData(cmd, request.JSON)
                 cmd.id = schemePublicId
-                schemeReviewService.reject(cmd, userId, id)
+                schemeReviewService.reject(cmd, userId, UUID.fromString(id))
                 break
             default:
                 throw new BadRequestException()
