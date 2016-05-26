@@ -7,6 +7,6 @@ package cn.edu.bnuz.bell.workflow
 class WorkflowController {
     WorkflowService workflowService
     def workitems(String workflowId) {
-        renderJson workflowService.getInstanceWorkitems(workflowId)
+        renderJson workflowService.getInstanceWorkitems(UUID.fromString(workflowId))
     }
 }

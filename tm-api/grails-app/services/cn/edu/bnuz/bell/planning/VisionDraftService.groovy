@@ -148,7 +148,7 @@ select new map(
   program.id as programId,
   program.type as programType,
   subject.name as subjectName,
-  major.department.id as departmentId
+  major.department.id as departmentId,
   major.grade as grade
 )
 from Program program
@@ -183,7 +183,7 @@ where program.id = :programId
      * 更新
      * @param cmd 更新数据
      * @param userId 用户ID
-     * @return Scheme
+     * @return Vision
      */
     def update(VisionUpdateCommand cmd, String userId) {
         Vision vision = Vision.get(cmd.id)
@@ -208,6 +208,12 @@ where program.id = :programId
         return vision
     }
 
+    /**
+     * 修订
+     * @param cmd 修订数据
+     * @param userId 用户ID
+     * @return Vision
+     */
     Vision revise(VisionReviseCommand cmd, String userId) {
         if (!programService.isOwner(cmd.programId, userId)) {
             throw new ForbiddenException()
@@ -229,6 +235,33 @@ where program.id = :programId
 
         return vision
     }
+
+    /**
+     * 新建
+     * @param cmd 新建数据
+     * @param userId 用户ID
+     * @return Vision
+     */
+    Vision create(VisionCreateCommand cmd, String userId) {
+        if (!programService.isOwner(cmd.programId, userId)) {
+            throw new ForbiddenException()
+        }
+
+        if (!canCreate(cmd.programId)) {
+            throw new BadRequestException()
+        }
+
+        Vision vision = new Vision()
+        vision.properties = cmd
+        vision.program = Program.load(cmd.programId)
+        vision.status = AuditStatus.CREATED
+        vision.save()
+
+        userLogService.log(AuditAction.CREATE, vision)
+
+        return vision
+    }
+
 
     /**
      * 删除

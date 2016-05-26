@@ -22,6 +22,7 @@ class SchemeDto {
 
     Boolean editable
     Boolean revisable
+    String reviewType
 
     List courses
     List tempCourses

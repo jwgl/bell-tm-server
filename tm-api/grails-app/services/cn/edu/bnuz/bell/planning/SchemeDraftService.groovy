@@ -413,7 +413,7 @@ where program.id = :programId
             if (!c.isTempCourse) {
                 if (c.schemeId == scheme.id) {
                     // 删除新增项
-                    SchemeCourse.load(c.id).delete()
+                    scheme.removeFromCourses(SchemeCourse.load(c.id))
                 } else {
                     // 恢复删除项
                     SchemeCourse.revertDelete(c.id)
@@ -421,7 +421,7 @@ where program.id = :programId
             } else {
                 if (c.schemeId == scheme.id) {
                     // 删除新增项
-                    SchemeTempCourse.load(c.id).delete()
+                    scheme.removeFromTempCourses(SchemeTempCourse.load(c.id))
                 } else {
                     // 恢复删除项
                     SchemeTempCourse.revertDelete(c.id)

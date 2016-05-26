@@ -22,7 +22,7 @@ class VisionReviewService {
      * @param workitemId 工作项ID
      * @return 审核数据
      */
-    def getVisionForReview(Long id, String userId, String workitemId) {
+    def getVisionForReview(Long id, String userId, UUID workitemId) {
         def vision = visionPublicService.getVisionInfo(id)
 
         Workitem workItem = Workitem.get(workitemId)
@@ -56,7 +56,7 @@ class VisionReviewService {
      * @param userId 用户ID
      * @param workItemId 工作项ID
      */
-    void accept(AcceptCommand cmd, String userId, String workItemId) {
+    void accept(AcceptCommand cmd, String userId, UUID workItemId) {
         Vision vision = Vision.get(cmd.id)
 
         if (!vision) {
@@ -102,7 +102,7 @@ class VisionReviewService {
      * @param userId 用户ID
      * @param workItemId 工作项ID
      */
-    void reject(RejectCommand cmd, String userId, String workItemId) {
+    void reject(RejectCommand cmd, String userId, UUID workItemId) {
         Vision vision = Vision.get(cmd.id)
 
         if (!vision) {

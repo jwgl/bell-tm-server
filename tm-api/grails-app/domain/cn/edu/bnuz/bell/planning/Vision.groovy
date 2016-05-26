@@ -62,6 +62,7 @@ class Vision {
 
     static mapping = {
         comment             '培养方案-目标与规格'
+        dynamicUpdate       true
         id                  generator: 'identity', comment: '培养方案-目标与规格ID'
         program             type: 'integer', comment: '教学计划'
         versionNumber       comment: '版本号'
