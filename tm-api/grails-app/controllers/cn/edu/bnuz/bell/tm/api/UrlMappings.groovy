@@ -63,7 +63,7 @@ class UrlMappings {
         "/subjectDirectors"(resources: 'subjectDirector', includes: ['index', 'save'])
 
         // 计划设置
-        "/programSettings"(resources: 'programSettings', includes: ['index', 'patch']) {
+        "/programSettings"(resources: 'programSettings', includes: ['index', 'update']) {
             collection {
                 "/grades"(controller: 'programSettings', action: 'grades', method: 'GET')
             }

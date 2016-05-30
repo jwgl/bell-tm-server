@@ -41,7 +41,8 @@ select new Map(
     st.id as id,
     st.residualProperty.id as residualPropertyId,
     st.minResidualCredit as minResidualCredit,
-    ps.schemeTemplateLocked as schemeTemplateLocked
+    ps.schemeTemplateLocked as schemeTemplateLocked,
+    ps.practiceCreditRatio as practiceCreditRatio
 )
 from ProgramSettings ps
 join ps.schemeTemplate st

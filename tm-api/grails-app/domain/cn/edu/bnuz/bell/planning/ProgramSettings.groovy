@@ -31,6 +31,11 @@ class ProgramSettings {
     Boolean schemeRevisible
 
     /**
+     * 实践学分比例（0.25，0.3）
+     */
+    BigDecimal practiceCreditRatio
+
+    /**
      * 是否可修订培养方案
      */
     Boolean visionRevisible
@@ -42,6 +47,7 @@ class ProgramSettings {
         schemeTemplate       comment: '教学安排模板'
         schemeTemplateLocked defaultValue: "true", comment: '是否锁定模板'
         schemeRevisible      defaultValue: "true", comment: '是否可修订教学计划'
+        practiceCreditRatio  precision: 4, scale: 2, defaultValue: "0", comment: '实践学分比例'
         visionRevisible      defaultValue: "true", comment: '是否可修订培养方案'
     }
 }

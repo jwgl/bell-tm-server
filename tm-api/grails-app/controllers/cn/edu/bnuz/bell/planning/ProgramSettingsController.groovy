@@ -1,6 +1,5 @@
 package cn.edu.bnuz.bell.planning
 
-import cn.edu.bnuz.bell.http.BadRequestException
 import cn.edu.bnuz.bell.http.ServiceExceptionHandler
 
 /**
@@ -19,24 +18,10 @@ class ProgramSettingsController implements ServiceExceptionHandler{
         }
     }
 
-    def patch(Integer id) {
-        def data = request.JSON
-        switch (data.field) {
-            case 'templateLocked':
-                programSettingsService.setSchemeTemplateLocked(id, data.value as Boolean)
-                break
-            case 'schemeRevisible':
-                programSettingsService.setSchemeRevisible(id, data.value as Boolean)
-                break
-            case 'schemeTemplate':
-                programSettingsService.setSchemeTemplate(id, data.value as Integer)
-                break
-            case 'visionRevisible':
-                programSettingsService.setVisionRevisible(id, data.value as Boolean)
-                break
-            default:
-                throw new BadRequestException()
-        }
+    def update(Integer id) {
+        ProgramSettingsCommand cmd = new ProgramSettingsCommand()
+        bindData cmd, request.JSON
+        programSettingsService.update(id, cmd)
         renderOk()
     }
 
