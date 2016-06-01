@@ -19,6 +19,6 @@ class SchemeCourseDto {
     Boolean isTempCourse
 
     static mapping = {
-        table 'v_scheme_course'
+        table 'dv_scheme_course'
     }
 }

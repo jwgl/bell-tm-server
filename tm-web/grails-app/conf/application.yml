@@ -143,7 +143,7 @@ bell:
         ignored:
             schemas:
                 - 'ea'
-            viewPrefix: 'v_'
+            viewPrefix: 'dv_'
 
 ---
 spring.cloud.netflix.metrics.enabled: false

@@ -14,7 +14,7 @@ class UserAppRole implements Serializable {
 
     static mapping = {
         comment     '用户-应用-角色'
-        table       'v_user_app_role'
+        table       'dv_user_app_role'
         id          composite: ['roleId', 'userId'], comment: '用户应用角色ID'
         userId      comment: '用户'
         roleId      comment: '角色'

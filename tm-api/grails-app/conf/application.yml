@@ -129,4 +129,4 @@ bell:
         ignored:
             schemas:
                 - 'ea'
-            viewPrefix: 'v_'
+            viewPrefix: 'dv_'
