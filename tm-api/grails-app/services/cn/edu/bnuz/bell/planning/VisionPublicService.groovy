@@ -121,7 +121,8 @@ select new map(
   program.id as programId,
   program.type as programType,
   subject.name as subjectName,
-  major.department.id as departmentId,
+  department.id as departmentId,
+  department.name as departmentName,
   major.grade as grade,
   vision.objective as objective,
   vision.specification as specification,
@@ -136,6 +137,7 @@ join vision.program program
 join program.major major
 join major.subject subject
 join major.degree degree
+join major.department department
 left join vision.previous prev
 where vision.id = :id
 ''', [id: id]

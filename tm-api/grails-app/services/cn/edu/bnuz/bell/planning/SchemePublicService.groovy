@@ -44,7 +44,7 @@ and scheme.versionNumber = (
   where s.status = :status
   and s.program = scheme.program
 )
-order by department.id, subject.id, program.id, major.grade
+order by department.id, subject.id, major.grade
 ''', [startGrade: startGrade, status: AuditStatus.APPROVED]
 
         List<GroupCondition> conditions = [
@@ -151,6 +151,7 @@ select new Dto (
   program.type,
   subject.name,
   department.id as departmentId,
+  department.name as departmentName,
   major.grade,
   program.credit,
   scheme.status,

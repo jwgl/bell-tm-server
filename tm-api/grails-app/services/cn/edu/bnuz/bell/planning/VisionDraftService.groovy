@@ -148,12 +148,14 @@ select new map(
   program.id as programId,
   program.type as programType,
   subject.name as subjectName,
-  major.department.id as departmentId,
+  department.id as departmentId,
+  department.name as departmentName,
   major.grade as grade
 )
 from Program program
 join program.major major
 join major.subject subject
+join major.department department
 where program.id = :programId
 ''', [programId: programId]
 
@@ -341,6 +343,11 @@ where vision.id = :id
     select max(v.versionNumber)
     from Vision v
     where v.program = vision.program
+  )
+  and vision.program.id in (
+    select program.id
+    from ProgramSettings ps
+    where ps.visionRevisible = true
   )
 ''', [id: id, status: AuditStatus.APPROVED]
     }
