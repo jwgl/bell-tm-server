@@ -175,6 +175,7 @@ select new Dto (
   program.type as programType,
   subject.name as subjectName,
   department.id as departmentId,
+  department.name ad departmentName,
   major.grade as grade,
   program.credit as credit
 )
