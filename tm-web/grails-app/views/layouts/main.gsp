@@ -14,23 +14,27 @@
 </head>
 <body>
     <header class="navbar navbar-static-top navbar-light bg-faded">
-        <div class="clearfix">
-            <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#bd-main-nav">
-                &#9776;
-            </button>
-        </div>
-        <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
-            <div class="navbar-brand logo"></div>
-            <ul class="nav navbar-nav">
-                <b:menu root="main"></b:menu>
-            </ul>
-            <ul class="nav navbar-nav pull-xs-right">
-                <b:menu root="user"></b:menu>
-                <li class="nav-item">
-                    <form id="logoutForm" action="/logout" method="post"></form>
-                    <a id="logout" class="nav-link" href="#">${message(code:'menu.user.logout')}</a>
-                </li>
-            </ul>
+        <div class="container">
+            <nav>
+                <div class="clearfix">
+                    <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#bd-main-nav">
+                        &#9776;
+                    </button>
+                </div>
+                <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
+                    <div class="navbar-brand logo"></div>
+                    <ul class="nav navbar-nav">
+                        <b:menu root="main"></b:menu>
+                    </ul>
+                    <ul class="nav navbar-nav pull-xs-right">
+                        <b:menu root="user"></b:menu>
+                        <li class="nav-item">
+                            <form id="logoutForm" action="/logout" method="post"></form>
+                            <a id="logout" class="nav-link" href="#">${message(code:'menu.user.logout')}</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
     </header>
     <div class="container">
