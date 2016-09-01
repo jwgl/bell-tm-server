@@ -3,19 +3,19 @@ package cn.edu.bnuz.bell.security
 import org.apache.commons.lang.builder.HashCodeBuilder
 
 /**
- * 用户应用角色
+ * 学生角色
  * @author Yang Lin
  */
-class UserAppRole implements Serializable {
+class StudentRole implements Serializable {
     private static final long serialVersionUID = 1
 
     String userId
     String roleId
 
     static mapping = {
-        comment     '用户-应用-角色'
-        table       'dv_user_app_role'
-        id          composite: ['roleId', 'userId'], comment: '用户应用角色ID'
+        comment     '学生-角色'
+        table       'dv_student_role'
+        id          composite: ['roleId', 'userId'], comment: 'ID'
         userId      comment: '用户'
         roleId      comment: '角色'
     }
@@ -35,7 +35,7 @@ class UserAppRole implements Serializable {
         builder.toHashCode()
     }
 
-    static List<String> getUserRoles(String userId) {
-        UserAppRole.executeQuery "select roleId from UserAppRole where userId=:userId", [userId: userId]
+    static List<String> getRoles(String userId) {
+        StudentRole.executeQuery "select roleId from StudentRole where userId=:userId", [userId: userId]
     }
 }

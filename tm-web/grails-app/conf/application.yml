@@ -149,6 +149,7 @@ bell:
             schemas:
                 - 'ea'
             viewPrefix: 'dv_'
-
+    student:
+        picturePath: 'D:\bell\bell-tm-pictures'
 ---
 spring.cloud.netflix.metrics.enabled: false

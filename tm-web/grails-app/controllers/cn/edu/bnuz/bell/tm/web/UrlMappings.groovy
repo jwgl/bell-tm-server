@@ -19,8 +19,10 @@ class UrlMappings {
 
         "/users"(resources: 'user') {
             "/works"(resources: 'workitem', includes: ['index', 'show'])
-            "/visions"(resources: 'visionDraft', includes: ['index', 'show'])
-            "/schemes"(resources: 'schemeDraft', includes: ['index', 'show'])
+            "/visions"(resources: 'visionDraft', includes: ['index'])
+            "/schemes"(resources: 'schemeDraft', includes: ['index'])
+            "/cardReissues"(resources: 'cardReissueForm', includes: ['index'])
+            "/picture"(resource: 'picture', includes: ['show'])
         }
 
         group "/settings", {

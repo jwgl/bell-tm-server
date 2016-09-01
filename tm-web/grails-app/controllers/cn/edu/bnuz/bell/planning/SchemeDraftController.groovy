@@ -9,6 +9,4 @@ import org.springframework.security.access.annotation.Secured
 @Secured(['ROLE_PERM_SCHEME_WRITE'])
 class SchemeDraftController {
     def index() {}
-
-    def show() {}
 }

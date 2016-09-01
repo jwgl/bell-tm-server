@@ -26,13 +26,29 @@ class TmUserDetailsService implements UserDetailsService {
                 Collection<GrantedAuthority> authorities = []
                 authorities << new SimpleGrantedAuthority(Roles.USER)
 
-                loadAuthorities(authorities, user)
+                switch (user.userType) {
+                    case UserType.TEACHER:
+                        loadTeacherAuthorities(authorities, user)
+                        break
+                    case UserType.STUDENT:
+                        loadStudentAuthorities(authorities, user)
+                        break
+                    case UserType.EXTERNAL:
+                        loadExternalAuthorities(authorities, user)
+                }
+
+                // 角色权限
+                def roles = authorities.collect { it.authority }
+                def permissions = RolePermission.findPermissionsByRoles roles
+                authorities.addAll permissions.collect { new SimpleGrantedAuthority("ROLE_${it.id}") }
+
+                log.debug authorities.toString()
                 return new TmUser(user, authorities)
             }
         }
     }
 
-    protected Collection<GrantedAuthority> loadAuthorities(Collection<GrantedAuthority> authorities, User user) {
+    private Collection<GrantedAuthority> loadTeacherAuthorities(Collection<GrantedAuthority> authorities, User user) {
         // 固定角色
         authorities << new SimpleGrantedAuthority(Roles.TEACHER)
 
@@ -40,14 +56,28 @@ class TmUserDetailsService implements UserDetailsService {
         authorities.addAll user.roles.collect { new SimpleGrantedAuthority(it.role.id) }
 
         // 模块角色
-        authorities.addAll UserAppRole.getUserRoles(user.id).collect {new SimpleGrantedAuthority(it)}
+        authorities.addAll TeacherRole.getRoles(user.id).collect {new SimpleGrantedAuthority(it)}
 
-        // 角色权限
-        def roles = authorities.collect { it.authority }
-        def permissions = RolePermission.findPermissionsByRoles roles
-        authorities.addAll permissions.collect { new SimpleGrantedAuthority("ROLE_${it.id}") }
+        return authorities
+    }
 
-        log.debug authorities.toString()
+    private Collection<GrantedAuthority> loadStudentAuthorities(Collection<GrantedAuthority> authorities, User user) {
+        // 固定角色
+        authorities << new SimpleGrantedAuthority(Roles.STUDENT)
+
+        // 模块角色
+        authorities.addAll StudentRole.getRoles(user.id).collect {new SimpleGrantedAuthority(it)}
+
+        return authorities
+    }
+
+    private Collection<GrantedAuthority> loadExternalAuthorities(Collection<GrantedAuthority> authorities, User user) {
+        // 固定角色
+        authorities << new SimpleGrantedAuthority(Roles.EXTERNAL)
+
+        // 模块角色
+        authorities.addAll ExternalRole.getRoles(user.id).collect {new SimpleGrantedAuthority(it)}
+
         return authorities
     }
 }
