@@ -9,6 +9,4 @@ import org.springframework.security.access.annotation.Secured
 @Secured(['ROLE_PERM_VISION_WRITE'])
 class VisionDraftController {
     def index() {}
-
-    def show() {}
 }

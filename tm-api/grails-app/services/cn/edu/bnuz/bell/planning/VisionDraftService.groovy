@@ -285,7 +285,7 @@ where program.id = :programId
             throw new BadRequestException()
         }
 
-        userLogService.log(Vision, AuditAction.DELETE, vision)
+        userLogService.log(AuditAction.DELETE, vision)
 
         if (vision.workflowInstance) {
             vision.workflowInstance.delete()

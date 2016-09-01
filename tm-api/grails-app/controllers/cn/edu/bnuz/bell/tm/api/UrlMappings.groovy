@@ -28,6 +28,9 @@ class UrlMappings {
                     "/courses"(controller: 'schemeDraft', action: 'courses', method: 'GET')
                 }
             }
+            "/cardReissues"(resources: 'cardReissueForm') {
+                "/checkers"(controller: 'cardReissueForm', action: 'checkers', method: 'GET')
+            }
         }
 
         // 按学院获取信息
