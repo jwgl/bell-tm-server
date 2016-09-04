@@ -6,6 +6,6 @@
     <asset:script src="/static/js/app/scheme/review.js"></asset:script>
 </head>
 <body>
-    <review-scheme id="${params.schemePublicId}" wi="${params.id}"></review-scheme>
+    <scheme-review id="${params.schemePublicId}" wi="${params.id}"></scheme-review>
 </body>
 </html>

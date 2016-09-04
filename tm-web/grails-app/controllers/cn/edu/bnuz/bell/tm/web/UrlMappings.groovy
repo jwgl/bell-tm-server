@@ -17,6 +17,10 @@ class UrlMappings {
             "/reviews"(resources: 'schemeReview', includes:['show'])
         }
 
+        "/cardReissues"(resources: 'cardReissueForm', includes:[]) {
+            "/reviews"(resources: 'cardReissueReview', includes: ['show'])
+        }
+
         "/users"(resources: 'user') {
             "/works"(resources: 'workitem', includes: ['index', 'show'])
             "/visions"(resources: 'visionDraft', includes: ['index'])

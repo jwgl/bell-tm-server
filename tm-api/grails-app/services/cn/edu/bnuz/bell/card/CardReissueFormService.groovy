@@ -12,6 +12,10 @@ import cn.edu.bnuz.bell.workflow.CommitCommand
 import cn.edu.bnuz.bell.workflow.WorkflowService
 import grails.transaction.Transactional
 
+/**
+ * 补办学生证申请服务
+ * @author Yang Lin
+ */
 @Transactional
 class CardReissueFormService {
     UserLogService userLogService
@@ -49,30 +53,40 @@ where student.id = :studentId
         return results[0]
     }
 
-    def getFormForShow(String studentId, Long id) {
+    def getFormInfo(Long id) {
         def results = CardReissueForm.executeQuery '''
 select new map(
   form.id as id,
   form.reason as reason,
   form.status as status,
+  form.student.id as studentId,
   form.workflowInstance.id as workflowInstanceId
- )
+)
 from CardReissueForm form
-where form.id = :id and form.student.id = :studentId
-''', [id: id, studentId: studentId]
+where form.id = :id
+''', [id: id]
         if (!results) {
             throw new NotFoundException()
         }
 
         def form = results[0]
+        form.student = getStudent(form.studentId)
+        form.remove('studentId')
 
-        return [
-                id: form.id,
-                reason: form.reason,
-                workflowInstanceId: form.workflowInstanceId,
-                editable: form.status.allow(AuditAction.UPDATE),
-                student: getStudent(studentId),
-        ]
+        return form
+    }
+
+    def getFormForShow(String studentId, Long id) {
+        def form = getFormInfo(id)
+
+        if (form.student.id != studentId) {
+            throw new ForbiddenException()
+        }
+
+        form.editable = form.status.allow(AuditAction.UPDATE)
+        form.student = getStudent(studentId)
+
+        return form
     }
 
     def getFormForCreate(String studentId) {

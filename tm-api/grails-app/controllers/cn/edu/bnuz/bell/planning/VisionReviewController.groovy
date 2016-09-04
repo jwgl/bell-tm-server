@@ -20,8 +20,7 @@ class VisionReviewController implements ServiceExceptionHandler {
     /**
      * 审核显示
      * @param visionPublicId Vision ID
-     * @param id Workitem id
-     * @return
+     * @param id Workitem ID
      */
     def show(Long visionPublicId, String id) {
         renderJson visionReviewService.getVisionForReview(visionPublicId, securityService.userId, UUID.fromString(id))
@@ -32,7 +31,6 @@ class VisionReviewController implements ServiceExceptionHandler {
      * @param visionPublicId Vision ID
      * @param id Workitem ID
      * @param op 操作
-     * @return
      */
     def patch(Long visionPublicId, String id, String op) {
         def userId = securityService.userId

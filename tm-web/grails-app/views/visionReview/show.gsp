@@ -7,6 +7,6 @@
     <asset:script src="/static/js/app/vision/review.js"></asset:script>
 </head>
 <body>
-    <review-vision id="${params.visionPublicId}" wi="${params.id}"></review-vision>
+    <vision-review id="${params.visionPublicId}" wi="${params.id}"></vision-review>
 </body>
 </html>
