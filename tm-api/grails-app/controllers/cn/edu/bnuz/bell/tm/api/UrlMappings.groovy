@@ -60,6 +60,10 @@ class UrlMappings {
             }
         }
 
+        "/cardReissues"(resources: 'cardReissue', includes:[]) {
+            "/reviews"(resources: 'cardReissueReview', includes: ['show', 'patch'])
+        }
+
         "/schemeTemplates"(resources: 'schemeTemplate', includes: ['index'])
 
         // 专业负责人
