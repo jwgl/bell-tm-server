@@ -6,6 +6,6 @@
     <asset:script src="/static/js/app/cardReissue/review.js"></asset:script>
 </head>
 <body>
-    <card-reissue-review id="${params.cardReissueFormId}" wi="${params.id}"></card-reissue-review>
+    <card-reissue-review id="${params.cardReissueAdminId}" wi="${params.id}"></card-reissue-review>
 </body>
 </html>

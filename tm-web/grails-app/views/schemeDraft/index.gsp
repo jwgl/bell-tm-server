@@ -6,6 +6,6 @@
     <asset:script src="/static/js/app/scheme/draft.js"></asset:script>
 </head>
 <body>
-    <scheme-draft-container user="${params.userId}"></scheme-draft-container>
+    <scheme-draft-container></scheme-draft-container>
 </body>
 </html>

@@ -90,6 +90,7 @@ class SchemeDraftController implements ServiceExceptionHandler {
     def update(String userId, Long id) {
         def cmd = new SchemeUpdateCommand()
         bindData(cmd, request.JSON)
+        cmd.id = id;
         schemeDraftService.update(cmd, userId)
         renderOk()
     }

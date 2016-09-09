@@ -35,7 +35,7 @@ class CardReissueFormService {
 select new map(
   student.id as id,
   student.name as name,
-  cast(student.birthday as string) as birthday,
+  student.birthday as birthday,
   admission.fromProvince as province,
   department.name as department,
   subject.name as subject,
@@ -84,7 +84,6 @@ where form.id = :id
         }
 
         form.editable = form.status.allow(AuditAction.UPDATE)
-        form.student = getStudent(studentId)
 
         return form
     }

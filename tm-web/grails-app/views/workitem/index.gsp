@@ -6,6 +6,6 @@
     <asset:script src="/static/js/app/todo.js"></asset:script>
 </head>
 <body>
-    <todo-list-container userId="${params.userId}"></todo-list-container>
+    <todo-list-container></todo-list-container>
 </body>
 </html>

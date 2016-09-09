@@ -11,17 +11,21 @@ class WorkitemController {
     WorkflowService workflowService
 
     def index() {
+        Long offset = params.long("offset") ?: 0
+        Long max = params.long("max") ?: 20
         switch (params.is) {
             case 'open':
-                renderJson workflowService.getOpenWorkitems(securityService.userId)
+                renderJson([
+                    todos: workflowService.getOpenWorkitems(securityService.userId, offset, max),
+                    counts: workflowService.getCounts(securityService.userId)
+                ])
                 break
             case 'closed':
-                renderJson workflowService.getClosedWorkitems(securityService.userId)
+                renderJson([
+                    todos: workflowService.getClosedWorkitems(securityService.userId, offset, max),
+                    counts: workflowService.getCounts(securityService.userId)
+                ])
                 break
         }
-    }
-
-    def counts() {
-        renderJson workflowService.getCounts(securityService.userId)
     }
 }
