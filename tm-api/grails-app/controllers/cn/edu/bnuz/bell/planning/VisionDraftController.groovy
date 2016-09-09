@@ -89,6 +89,7 @@ class VisionDraftController implements ServiceExceptionHandler{
     def update(String userId, Long id) {
         def cmd = new VisionUpdateCommand()
         bindData(cmd, request.JSON)
+        cmd.id = id
         visionDraftService.update(cmd, userId)
         renderOk()
     }

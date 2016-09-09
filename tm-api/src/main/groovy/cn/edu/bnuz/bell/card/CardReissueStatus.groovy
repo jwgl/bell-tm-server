@@ -12,9 +12,10 @@ enum CardReissueStatus {
     NULL     (-1, "空"),
     CREATED  (0, "新建"),
     COMMITTED(1, "待审核"),
-    MAKING   (2, "制作中"),
-    REJECTED (3, "退回"),
-    FINISHED (4, "完成")
+    APPROVED (2, "已审核"),
+    MAKING   (3, "制作中"),
+    REJECTED (4, "退回"),
+    FINISHED (5, "完成")
 
     final Integer id
     final String name
@@ -32,17 +33,20 @@ enum CardReissueStatus {
             ],
             (COMMITTED): [
                     (AuditAction.CANCEL): CREATED,    // 取消
-                    (AuditAction.ACCEPT): MAKING,     // 制作中
+                    (AuditAction.ACCEPT): APPROVED,   // 已审核
                     (AuditAction.REJECT): REJECTED,   // 退回
             ],
-            (MAKING)  : [
-                    (AuditAction.ACCEPT): FINISHED,   // 入库
-                    (AuditAction.REJECT): COMMITTED,  // 删除订单项
+            (APPROVED): [
+                    (AuditAction.ACCEPT): MAKING,     // 制作中
             ],
             (REJECTED) : [
                     (AuditAction.UPDATE): CREATED,    // 编辑
                     (AuditAction.DELETE): NULL,       // 删除
                     (AuditAction.COMMIT): COMMITTED,  // 提交
+            ],
+            (MAKING)  : [
+                    (AuditAction.ACCEPT): FINISHED,   // 入库
+                    (AuditAction.REJECT): APPROVED,   // 删除订单项
             ],
             (FINISHED) : [
                     (AuditAction.REVOKE): MAKING,     // 取消入库

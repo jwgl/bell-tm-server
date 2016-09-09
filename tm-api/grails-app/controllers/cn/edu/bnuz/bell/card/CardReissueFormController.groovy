@@ -9,6 +9,10 @@ import cn.edu.bnuz.bell.workflow.CommitCommand
 import grails.util.Holders
 import org.springframework.security.access.annotation.Secured
 
+/**
+ * 补办学生证申请（学生）
+ * @author Yang Lin
+ */
 @Secured(['ROLE_PERM_CARD_REISSUE_WRITE'])
 class CardReissueFormController implements ServiceExceptionHandler {
     CardReissueFormService cardReissueFormService

@@ -14,11 +14,8 @@ class UrlMappings {
 
         // 按用户获取信息
         "/users"(resources: 'user', includes: []) {
-            "/works"(resources: 'workitem', includes: ['index']) {
-                collection {
-                    '/counts'(controller: 'workitem', action: 'counts', method: 'GET')
-                }
-            }
+            "/works"(resources: 'workitem', includes: ['index'])
+
             "/visions"(resources: 'visionDraft') {
                 "/checkers"(controller: 'visionDraft', action: 'checkers', method: 'GET')
             }
@@ -60,10 +57,7 @@ class UrlMappings {
             }
         }
 
-        "/cardReissues"(resources: 'cardReissue', includes:[]) {
-            "/reviews"(resources: 'cardReissueReview', includes: ['show', 'patch'])
-        }
-
+        // 教学计划模板
         "/schemeTemplates"(resources: 'schemeTemplate', includes: ['index'])
 
         // 专业负责人
@@ -75,6 +69,14 @@ class UrlMappings {
                 "/grades"(controller: 'programSettings', action: 'grades', method: 'GET')
             }
         }
+
+        // 补办学生证管理
+        "/cardReissues"(resources: 'cardReissueAdmin', includes:['index', 'show']) {
+            "/reviews"(resources: 'cardReissueAdmin', includes: ['patch'])
+        }
+
+        // 补办学生证订单
+        "/cardReissueOrders"(resources: 'cardReissueOrder')
 
         "500"(view: '/error')
         "404"(view: '/notFound')

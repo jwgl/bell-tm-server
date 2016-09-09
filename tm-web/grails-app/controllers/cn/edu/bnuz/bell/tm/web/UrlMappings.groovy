@@ -17,9 +17,11 @@ class UrlMappings {
             "/reviews"(resources: 'schemeReview', includes:['show'])
         }
 
-        "/cardReissues"(resources: 'cardReissueForm', includes:[]) {
+        "/cardReissues"(resources: 'cardReissueAdmin', includes:['index', 'show']) {
             "/reviews"(resources: 'cardReissueReview', includes: ['show'])
         }
+
+        "/cardReissueOrders"(resources: 'cardReissueOrder', includes: ['index'])
 
         "/users"(resources: 'user') {
             "/works"(resources: 'workitem', includes: ['index', 'show'])
