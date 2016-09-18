@@ -123,10 +123,6 @@ security:
         resource:
             userInfoUri: http://localhost/uaa/user
 
-logging:
-    level:
-        #org.springframework.security: DEBUG
-
 bell:
     orm:
         ignored:

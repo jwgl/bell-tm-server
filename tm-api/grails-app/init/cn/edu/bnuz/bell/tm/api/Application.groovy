@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer
 
 @SpringBootApplication
-@EnableResourceServer
+    @EnableResourceServer
 @EnableGlobalMethodSecurity(securedEnabled=true)
 class Application extends GrailsAutoConfiguration implements EnvironmentAware {
     static void main(String[] args) {

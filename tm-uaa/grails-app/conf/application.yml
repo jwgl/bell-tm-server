@@ -23,10 +23,10 @@ environments:
             logSql: true
     test:
         dataSource:
-            dbCreate: update
+            dbCreate: validate
     production:
         dataSource:
-            dbCreate: update
+            dbCreate: validate
             properties:
                 jmxEnabled: true
                 initialSize: 5
@@ -129,9 +129,7 @@ endpoints:
 server:
     port: 9999
     contextPath: /uaa
-logging:
-    level:
-        #org.springframework.security: DEBUG
+
 
 bell:
     orm:

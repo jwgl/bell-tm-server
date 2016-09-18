@@ -23,10 +23,10 @@ environments:
             logSql: true
     test:
         dataSource:
-            dbCreate: update
+            dbCreate: validate
     production:
         dataSource:
-            dbCreate: update
+            dbCreate: validate
             properties:
                 jmxEnabled: true
                 initialSize: 5
@@ -134,14 +134,13 @@ zuul:
         api:
             path: /api/**
             url: http://localhost:9000/api
+        rpt:
+            path: /rpt/**
+            url: http://localhost:9001/rpt
 
 server:
     session:
         timeout: 1200
-
-logging:
-    level:
-#        org.springframework.security: DEBUG
 
 bell:
     orm:

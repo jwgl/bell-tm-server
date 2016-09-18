@@ -41,6 +41,7 @@
         <g:layoutBody />
     </div>
     <footer></footer>
+    <script src="/static/js/lib/moment-with-locales.min.js"></script>
     <script src="/static/js/lib/jquery.min.js"></script>
     <script src="/static/js/lib/tether.min.js"></script>
     <script src="/static/js/lib/bootstrap.min.js"></script>

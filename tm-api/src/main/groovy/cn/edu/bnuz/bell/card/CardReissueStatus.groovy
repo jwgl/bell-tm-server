@@ -49,7 +49,7 @@ enum CardReissueStatus {
                     (AuditAction.REJECT): APPROVED,   // 删除订单项
             ],
             (FINISHED) : [
-                    (AuditAction.REVOKE): MAKING,     // 取消入库
+                    (AuditAction.REJECT): MAKING,     // 取消入库
             ]
     ]
 
