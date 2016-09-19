@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <text-property name="title">学生证制作清单</text-property>
+    <property name="units">in</property>
+    <property name="theme">tm-common.defaultTheme</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">fixed layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">tm-common.rptlibrary</property>
+            <property name="namespace">tm-common</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="orderId" id="45">
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">decimal</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="5"
+ extends="tm-common.Data Source">
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/bell</property>
+            <property name="odaUser">tm</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">dG0=</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Order Items" id="6">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">ordinal</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">RANK</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["student_id"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">student_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">student_id</text-property>
+                    <text-property name="heading">student_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">student_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">student_name</text-property>
+                    <text-property name="heading">student_name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sex</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">sex</text-property>
+                    <text-property name="heading">sex</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">province</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">province</text-property>
+                    <text-property name="heading">province</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">department</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">department</text-property>
+                    <text-property name="heading">department</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">subject</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">subject</text-property>
+                    <text-property name="heading">subject</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">birthday</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">birthday</text-property>
+                    <text-property name="heading">birthday</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">education_level</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">education_level</text-property>
+                    <text-property name="heading">education_level</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">apply_date</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">apply_date</text-property>
+                    <text-property name="heading">apply_date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">valid_date</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">valid_date</text-property>
+                    <text-property name="heading">valid_date</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">orderId</property>
+                    <property name="paramName">orderId</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">student_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">student_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">sex</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">province</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">department</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">subject</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">birthday</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">education_level</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">apply_date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">valid_date</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">ordinal</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">student_id</property>
+                    <property name="nativeName">student_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">student_name</property>
+                    <property name="nativeName">student_name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">sex</property>
+                    <property name="nativeName">sex</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">province</property>
+                    <property name="nativeName">province</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">department</property>
+                    <property name="nativeName">department</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">subject</property>
+                    <property name="nativeName">subject</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">birthday</property>
+                    <property name="nativeName">birthday</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">education_level</property>
+                    <property name="nativeName">education_level</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">apply_date</property>
+                    <property name="nativeName">apply_date</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">valid_date</property>
+                    <property name="nativeName">valid_date</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+  student.id as student_id,
+  student.name as student_name,
+  student.sex as sex,
+  admission.from_province as province,
+  department.name as department,
+  subject.name as subject,
+  student.birthday,
+  '本科' as education_level,
+  form.date_modified as apply_date,
+  to_date(concat(major.grade + subject.length_of_schooling, '-07-01'), 'YYYY-MM-DD') as valid_date
+from tm.card_reissue_order ro
+join tm.card_reissue_order_item oi on ro.id = oi.order_id
+join tm.card_reissue_form form on oi.form_id = form.id
+join ea.student on form.student_id = student.id
+join ea.admission on student.admission_id = admission.id
+join ea.department on student.department_id = department.id
+join ea.major on student.major_id = major.id
+join ea.subject on major.subject_id = subject.id
+where ro.id = ?
+order by student.id]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>id</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>creator_id</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>5</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>creator_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>creator_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date_created</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>date_created</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>date_created</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date_modified</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>date_modified</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>date_modified</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>modifier_id</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>5</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>modifier_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>modifier_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>5</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="A4-Landscape" id="42" extends="tm-common.A4-Landscape"/>
+    </page-setup>
+    <body>
+        <table id="117">
+            <property name="dataSet">Order Items</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">student_id</property>
+                    <text-property name="displayName">student_id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["student_id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">student_name</property>
+                    <text-property name="displayName">student_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["student_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sex</property>
+                    <text-property name="displayName">sex</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["sex"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">province</property>
+                    <text-property name="displayName">province</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["province"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">department</property>
+                    <text-property name="displayName">department</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["department"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">subject</property>
+                    <text-property name="displayName">subject</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["subject"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">birthday</property>
+                    <text-property name="displayName">birthday</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["birthday"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">education_level</property>
+                    <text-property name="displayName">education_level</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["education_level"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">apply_date</property>
+                    <text-property name="displayName">apply_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["apply_date"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">valid_date</property>
+                    <text-property name="displayName">valid_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["valid_date"]</expression>
+                    <property name="dataType">date</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">ordinal</property>
+                    <text-property name="displayName">ordinal</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ordinal"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <column id="190">
+                <property name="width">10mm</property>
+            </column>
+            <column id="176">
+                <property name="width">20mm</property>
+            </column>
+            <column id="177">
+                <property name="width">16mm</property>
+            </column>
+            <column id="178">
+                <property name="width">10mm</property>
+            </column>
+            <column id="179">
+                <property name="width">30mm</property>
+            </column>
+            <column id="180">
+                <property name="width">38mm</property>
+            </column>
+            <column id="181">
+                <property name="width">45mm</property>
+            </column>
+            <column id="182">
+                <property name="width">22mm</property>
+            </column>
+            <column id="183">
+                <property name="width">10mm</property>
+            </column>
+            <column id="184">
+                <property name="width">22mm</property>
+            </column>
+            <column id="185">
+                <property name="width">22mm</property>
+            </column>
+            <header>
+                <row id="229">
+                    <cell id="230">
+                        <property name="colSpan">11</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <text id="241">
+                            <property name="fontSize">20pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[学生证制作清单]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="215">
+                    <cell id="216">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="227">
+                            <text-property name="text">编号</text-property>
+                        </label>
+                    </cell>
+                    <cell id="217">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <text-data id="228">
+                            <property name="textAlign">left</property>
+                            <expression name="valueExpr">params["orderId"].value</expression>
+                            <property name="contentType">html</property>
+                        </text-data>
+                    </cell>
+                    <cell id="218">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="219">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="220">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="221">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="222">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="223">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="224">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="225">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="242">
+                            <text-property name="text">打印日期</text-property>
+                        </label>
+                    </cell>
+                    <cell id="226">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <text-data id="243">
+                            <expression name="valueExpr">Formatter.format(new Date(), 'yyyy-MM-dd')</expression>
+                            <property name="contentType">html</property>
+                        </text-data>
+                    </cell>
+                </row>
+                <row id="118">
+                    <cell id="187">
+                        <label id="191">
+                            <text-property name="text">序号</text-property>
+                        </label>
+                    </cell>
+                    <cell id="119">
+                        <label id="120">
+                            <text-property name="text">学号</text-property>
+                        </label>
+                    </cell>
+                    <cell id="121">
+                        <label id="122">
+                            <text-property name="text">姓名</text-property>
+                        </label>
+                    </cell>
+                    <cell id="123">
+                        <label id="124">
+                            <text-property name="text">性别</text-property>
+                        </label>
+                    </cell>
+                    <cell id="125">
+                        <label id="126">
+                            <text-property name="text">生源地</text-property>
+                        </label>
+                    </cell>
+                    <cell id="127">
+                        <label id="128">
+                            <text-property name="text">学院（部）</text-property>
+                        </label>
+                    </cell>
+                    <cell id="129">
+                        <label id="130">
+                            <text-property name="text">专业</text-property>
+                        </label>
+                    </cell>
+                    <cell id="131">
+                        <label id="132">
+                            <text-property name="text">出生日期</text-property>
+                        </label>
+                    </cell>
+                    <cell id="133">
+                        <label id="134">
+                            <text-property name="text">层次</text-property>
+                        </label>
+                    </cell>
+                    <cell id="135">
+                        <label id="136">
+                            <text-property name="text">补办日期</text-property>
+                        </label>
+                    </cell>
+                    <cell id="137">
+                        <label id="138">
+                            <text-property name="text">有效日期</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="141">
+                    <cell id="188">
+                        <data id="192">
+                            <property name="resultSetColumn">ordinal</property>
+                        </data>
+                    </cell>
+                    <cell id="142">
+                        <data id="143">
+                            <property name="resultSetColumn">student_id</property>
+                        </data>
+                    </cell>
+                    <cell id="144">
+                        <data id="145">
+                            <property name="resultSetColumn">student_name</property>
+                        </data>
+                    </cell>
+                    <cell id="146">
+                        <data id="147">
+                            <property name="resultSetColumn">sex</property>
+                        </data>
+                    </cell>
+                    <cell id="148">
+                        <data id="149">
+                            <property name="resultSetColumn">province</property>
+                        </data>
+                    </cell>
+                    <cell id="150">
+                        <data id="151">
+                            <property name="resultSetColumn">department</property>
+                        </data>
+                    </cell>
+                    <cell id="152">
+                        <data id="153">
+                            <property name="resultSetColumn">subject</property>
+                        </data>
+                    </cell>
+                    <cell id="154">
+                        <data id="155">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">yyyy-MM-dd</property>
+                            </structure>
+                            <property name="resultSetColumn">birthday</property>
+                        </data>
+                    </cell>
+                    <cell id="156">
+                        <data id="157">
+                            <property name="resultSetColumn">education_level</property>
+                        </data>
+                    </cell>
+                    <cell id="158">
+                        <data id="159">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">yyyy-MM-dd</property>
+                            </structure>
+                            <property name="resultSetColumn">apply_date</property>
+                        </data>
+                    </cell>
+                    <cell id="160">
+                        <data id="161">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">yyyy-MM-dd</property>
+                            </structure>
+                            <property name="resultSetColumn">valid_date</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="164">
+                    <cell id="189"/>
+                    <cell id="165"/>
+                    <cell id="166"/>
+                    <cell id="167"/>
+                    <cell id="168"/>
+                    <cell id="169"/>
+                    <cell id="170"/>
+                    <cell id="171"/>
+                    <cell id="172"/>
+                    <cell id="173"/>
+                    <cell id="174"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

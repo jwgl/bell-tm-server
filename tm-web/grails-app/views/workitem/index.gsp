@@ -2,7 +2,6 @@
 <head>
     <meta name="layout" content="main" />
     <title>待办事项</title>
-    <asset:script src="/static/js/lib/moment-with-locales.min.js"></asset:script>
     <asset:script src="/static/js/app/todo.js"></asset:script>
 </head>
 <body>

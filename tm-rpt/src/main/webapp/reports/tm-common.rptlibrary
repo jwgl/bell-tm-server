@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="units">in</property>
+    <property name="theme">defaultTheme</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="5">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/bell</property>
+            <property name="odaUser">tm</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">dG0=</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <themes>
+        <theme name="defaultTheme" id="4">
+            <styles>
+                <style name="table-cell" id="6">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                </style>
+                <style name="text" id="9">
+                    <property name="fontFamily">"宋体"</property>
+                    <property name="fontSize">10.5pt</property>
+                </style>
+                <style name="table" id="10">
+                    <property name="fontFamily">"宋体"</property>
+                    <property name="fontSize">11pt</property>
+                </style>
+                <style name="label" id="21">
+                    <property name="fontWeight">bold</property>
+                    <property name="textAlign">center</property>
+                </style>
+            </styles>
+        </theme>
+    </themes>
+    <page-setup>
+        <simple-master-page name="A4-Portrait" id="3">
+            <property name="type">a4</property>
+            <property name="orientation">portrait</property>
+            <property name="topMargin">2cm</property>
+            <property name="leftMargin">2cm</property>
+            <property name="bottomMargin">2cm</property>
+            <property name="rightMargin">2cm</property>
+            <property name="fontFamily">"宋体"</property>
+            <property name="fontSize">10.5pt</property>
+            <property name="headerHeight">0mm</property>
+            <property name="footerHeight">0mm</property>
+        </simple-master-page>
+        <simple-master-page name="A4-Landscape" id="8">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+            <property name="topMargin">2cm</property>
+            <property name="leftMargin">2cm</property>
+            <property name="bottomMargin">2cm</property>
+            <property name="rightMargin">2cm</property>
+            <property name="headerHeight">0mm</property>
+            <property name="footerHeight">0mm</property>
+        </simple-master-page>
+    </page-setup>
+</library>

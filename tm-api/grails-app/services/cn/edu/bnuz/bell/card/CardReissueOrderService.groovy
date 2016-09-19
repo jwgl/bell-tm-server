@@ -151,8 +151,13 @@ where oi.order.id = :id
         order.delete()
     }
 
-    void receive(Long formId, boolean received) {
-        def form = CardReissueForm.get(formId)
+    CardReissueStatus receive(Long id, Long formId, boolean received) {
+        def item = CardReissueOrderItem.findByOrderAndForm(CardReissueOrder.load(id), CardReissueForm.load(formId))
+        if (!item) {
+            throw new NotFoundException()
+        }
+
+        def form = item.form
         def action = received ? AuditAction.ACCEPT : AuditAction.REJECT;
         if (!form.status.allow(action)) {
             throw new BadRequestException()
@@ -160,9 +165,13 @@ where oi.order.id = :id
 
         form.status = form.status.next(action)
         form.save()
+
+        return form.status
     }
 
-    void receiveAll(Long id, boolean received) {
+    CardReissueStatus receiveAll(Long id, boolean received) {
+        def oldStatus = received ? CardReissueStatus.MAKING : CardReissueStatus.FINISHED
+        def newStatus = received ? CardReissueStatus.FINISHED : CardReissueStatus.MAKING
         CardReissueOrder.executeUpdate """
 update CardReissueForm
 set status = :newStatus
@@ -172,8 +181,7 @@ where id in (
   join o.items oi
   where o.id = :id
 ) and status = :oldStatus
-""", [id       : id,
-      oldStatus: received ? CardReissueStatus.APPROVED : CardReissueStatus.FINISHED,
-      newStatus: received ? CardReissueStatus.FINISHED : CardReissueStatus.APPROVED]
+""", [id: id, oldStatus: oldStatus, newStatus: newStatus]
+        return newStatus
     }
 }

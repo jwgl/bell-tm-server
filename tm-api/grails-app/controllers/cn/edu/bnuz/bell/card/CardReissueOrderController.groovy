@@ -1,5 +1,6 @@
 package cn.edu.bnuz.bell.card
 
+import cn.edu.bnuz.bell.http.BadRequestException
 import cn.edu.bnuz.bell.http.ServiceExceptionHandler
 import cn.edu.bnuz.bell.security.SecurityService
 import org.springframework.security.access.annotation.Secured
@@ -36,5 +37,20 @@ class CardReissueOrderController implements ServiceExceptionHandler {
         cmd.id = id
         cardReissueOrderService.update(userId, cmd)
         renderOk()
+    }
+
+    def patch(Long id) {
+        def status
+        switch (request.JSON.type) {
+            case 'RECEIVE':
+                status = cardReissueOrderService.receive(id, request.JSON.formId, request.JSON.received)
+                break
+            case 'RECEIVE_ALL':
+                status = cardReissueOrderService.receiveAll(id, request.JSON.received)
+                break
+            default:
+                throw new BadRequestException()
+        }
+        renderJson([status: status])
     }
 }
