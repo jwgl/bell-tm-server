@@ -23,7 +23,7 @@ class CardReissueOrderController implements ServiceExceptionHandler {
         def cmd = new CardReissueOrderCommand()
         bindData cmd, request.JSON
         def order = cardReissueOrderService.create(userId, cmd)
-        renderJson({id: order.id})
+        renderJson([id: order.id])
     }
 
     def edit(Long id) {
