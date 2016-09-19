@@ -12,16 +12,19 @@ class CardReissueOrderService {
         CardReissueOrder.executeQuery """
 select new map(
   o.id as id,
-  (select count(*) from CardReissueOrderItem oi where oi.order = o) as totalCount,
-  (select count(*) from CardReissueOrderItem oi where oi.order = o and oi.form.status = 4) as finishedCount,
+  count(oi.id) as totalCount,
+  sum(case when form.status = 5 then 1 else 0 end) as finishedCount,
   creator.name as creatorName,
   o.dateCreated as dateCreated,
   modifier.name as modifierName,
   o.dateModified as dateModified
 )
 from CardReissueOrder o
+join o.items oi
+join oi.form form
 join o.creator creator
 left join o.modifier modifier
+group by o.id, creator.name, o.dateCreated, modifier.name, o.dateModified
 order by o.id desc
 """
     }

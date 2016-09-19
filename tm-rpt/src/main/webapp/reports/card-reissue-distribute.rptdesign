@@ -238,7 +238,7 @@ join ea.department on student.department_id = department.id
 join ea.major on student.major_id = major.id
 join ea.subject on major.subject_id = subject.id
 join tm.dv_card_reissue_form_statis statis on form.id = statis.form_id
-where form.status = 3
+where form.status = 5
 and ro.id = ?
 order by department, admin_class, student.id]]></xml-property>
         </oda-data-set>

@@ -738,21 +738,6 @@ order by student.id]]></xml-property>
                     </cell>
                 </row>
             </detail>
-            <footer>
-                <row id="164">
-                    <cell id="189"/>
-                    <cell id="165"/>
-                    <cell id="166"/>
-                    <cell id="167"/>
-                    <cell id="168"/>
-                    <cell id="169"/>
-                    <cell id="170"/>
-                    <cell id="171"/>
-                    <cell id="172"/>
-                    <cell id="173"/>
-                    <cell id="174"/>
-                </row>
-            </footer>
         </table>
     </body>
 </report>
